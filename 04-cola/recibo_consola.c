@@ -10,18 +10,15 @@
 
 struct msgbuf{
 	long msg_tipo;
-	char texto[256];
+	char texto[30];
 };
 
 int main( int argc, char **argv){
 	struct msgbuf mensaje;
 	int msgid = msgget(0XA,0);
-	msgrcv(msgid,&mensaje,1,0,0);
-	while(mensaje.texto != '\0'){
-		printf("%c\n",mensaje.texto);
-		msgrcv(msgid,&mensaje,1,0,0);
-		sleep(1);
-	}
+	msgrcv(msgid,&mensaje,255,0,0);
+	printf("%s\n",mensaje.texto);
+	sleep(1);
 	exit(0);
 }
 

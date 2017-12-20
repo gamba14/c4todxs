@@ -10,18 +10,16 @@
 
 struct msgenvio{
 	long tipo_msg;
-	char texto;
+	char texto[30];
 };
 
 int main(int argc, char **argv){
-	char cadena[] = "hola amigos\0";
 	struct msgenvio mensaje;
 	int msgid = msgget(0XA,0);
 	printf("%d\n",msgid);
-	//strcpy(cadena,"Hola\0");
+	gets(mensaje.texto);
 	mensaje.tipo_msg = 1;
-	mensaje.texto = cadena;
-	msgsnd(msgid,&mensaje,sizeof(cadena),0);
+	msgsnd(msgid,&mensaje,sizeof(mensaje.texto),0);
 	exit(0);
 }
 	
